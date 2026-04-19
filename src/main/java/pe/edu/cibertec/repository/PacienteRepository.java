@@ -18,7 +18,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     List<Paciente> findByRaza(String raza);
 
-    @Query("SELECT p FROM Paciente p WHERE p.cliente.idCliente = :idCliente AND p.estado = true")
+    @Query("SELECT p FROM Paciente p WHERE p.cliente.idCliente = :idCliente")
     List<Paciente> findByClienteActivos(@Param("idCliente") Long idCliente);
 
     @Query("SELECT p FROM Paciente p WHERE p.estado = true ORDER BY p.nombre ASC")

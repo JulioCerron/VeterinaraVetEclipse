@@ -33,7 +33,7 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<Paciente> obtenerPorId(@PathVariable ("id") Long id) {
         Optional<Paciente> paciente = pacienteService.obtenerPorId(id);
         return paciente.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -58,7 +58,7 @@ public class PacienteController {
     }
 
     @GetMapping("/cliente/{idCliente}")
-    public ResponseEntity<List<Paciente>> obtenerPorCliente(@PathVariable Long idCliente) {
+    public ResponseEntity<List<Paciente>> obtenerPorCliente(@PathVariable("idCliente") Long idCliente) {
         List<Paciente> pacientes = pacienteService.obtenerPacientesDelCliente(idCliente);
         return ResponseEntity.ok(pacientes);
     }
@@ -71,8 +71,10 @@ public class PacienteController {
 
     @PostMapping
     public ResponseEntity<Paciente> crear(@RequestBody Paciente paciente) {
+    	System.out.println("paciente creado" + paciente);
         try {
             Paciente nuevoPaciente = pacienteService.crear(paciente);
+            
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPaciente);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -81,7 +83,7 @@ public class PacienteController {
     
     @PutMapping("/{id}")
     public ResponseEntity<Paciente> actualizar(
-            @PathVariable Long id,
+            @PathVariable ("id") Long id,
             @RequestBody Paciente paciente) {
         try {
             Paciente pacienteActualizado = pacienteService.actualizar(id, paciente);
@@ -92,7 +94,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable("id") Long id) {
         try {
             pacienteService.eliminar(id);
             return ResponseEntity.noContent().build();

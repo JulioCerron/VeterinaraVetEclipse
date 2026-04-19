@@ -24,14 +24,14 @@ public class Paciente {
     @Column(name = "id_paciente")
     private Long idPaciente;
 
-    @Column(name = "codigo", nullable = false, unique = true, length = 20)
+    @Column(name = "codigo",  unique = true, length = 20)
     private String codigo;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
     @Column(name = "especie", nullable = false, length = 50)
-    private String especie;
+    private String especie; 
 
     @Column(name = "raza", length = 50)
     private String raza;

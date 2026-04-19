@@ -41,7 +41,7 @@ public class ServicioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Servicio> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<Servicio> obtenerPorId(@PathVariable ("id") Long id) {
         Optional<Servicio> servicio = servicioService.obtenerPorId(id);
         return servicio.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -74,7 +74,7 @@ public class ServicioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Servicio> actualizar(
-            @PathVariable Long id,
+            @PathVariable ("id")Long id,
             @RequestBody Servicio servicio) {
         try {
             Servicio servicioActualizado = servicioService.actualizar(id, servicio);
